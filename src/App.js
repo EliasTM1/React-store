@@ -3,7 +3,7 @@ import React from 'react';
 //  * Componentes
 import Hompage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
-
+import Header from './components/header/header.component'
 //  * Router 
 import { Switch, Route } from 'react-router-dom'
 
@@ -21,12 +21,15 @@ import { Switch, Route } from 'react-router-dom'
 // ! Only one component will be shown as soon as it matches with. 
 function App() {
   return (
-    <Switch>
-      <div className="App">
-        <Route exact path='/' component={Hompage} />
-        <Route exact path='/shop' component={ShopPage} />
-      </div>
-    </Switch>
+    <div>
+      <Header />
+      <Switch>
+        <div className="App">
+          <Route exact path='/' component={Hompage} />
+          <Route exact path='/shop' component={ShopPage} />
+        </div>
+      </Switch>
+    </div>
   );
 }
 
