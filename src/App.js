@@ -1,9 +1,15 @@
 import React from 'react';
 
 //  * Componentes
+import Header from './components/header/header.component'
+
+//  * Pages
 import Hompage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
-import Header from './components/header/header.component'
+import SignInSignUp from './pages/signIn-signOut/signIn-signOut.component';
+// * Firebase
+import { auth } from './firebase/firebase.utils'
+
 //  * Router 
 import { Switch, Route } from 'react-router-dom'
 
@@ -19,18 +25,38 @@ import { Switch, Route } from 'react-router-dom'
 
 // * In case you decide to use <Switch><Switch/> 
 // ! Only one component will be shown as soon as it matches with. 
-function App() {
-  return (
-    <div>
-      <Header />
-      <Switch>
-        <div className="App">
-          <Route exact path='/' component={Hompage} />
-          <Route exact path='/shop' component={ShopPage} />
-        </div>
-      </Switch>
-    </div>
-  );
+
+
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      currentUser: null
+    }
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user })
+      console.log(user)
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+          <div className="App">
+            <Route exact path='/' component={Hompage} />
+            <Route exact path='/shop' component={ShopPage} />
+            <Route exact path='/signIn' component={SignInSignUp} />
+          </div>
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
