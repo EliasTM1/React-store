@@ -7,40 +7,15 @@ import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { auth } from '../../firebase/firebase.utils'
 // * Redux
 import { connect } from 'react-redux'
-
+//  * Syles and Icons
 import './header.styles.scss'
-
-// const Header = ({ currentUser }) => (
-//     <div className='header'>
-//         <Link to="/">
-//             <Logo className='logo' />
-//         </Link>
-//         <div className='options'>
-//             <Link className='option' to='/shop'>
-//                 SHOP
-//             </Link>
-//             <Link className='option' to='/shop'>
-//                 CONTACT
-//             </Link>
-//             {currentUser ? (
-//                 <button className='option' onClick={() => auth.signOut()}>
-//                     SIGN OUT
-//                 </button>
-//             ) : (
-//                 <Link className='option' to='/signin'>
-//                     SIGN IN
-//                 </Link>
-//             )}
-//         </div>
-//     </div>
-
-// )
-
-
+// * Components
+import CartIcon from '../cart-icon/cart-icon.component'
+import CartDropdown from '../cart-dropdown/cart-dropdown.component'
 
 const Header = ({ currentUser }) => (
     <div className='header'>
-        <Link className='logo-container' to='/'>
+        <Link to="/">
             <Logo className='logo' />
         </Link>
         <div className='options'>
@@ -51,17 +26,21 @@ const Header = ({ currentUser }) => (
                 CONTACT
             </Link>
             {currentUser ? (
-                <div className='option' onClick={() => auth.signOut()}>
+                <button className='option' onClick={() => auth.signOut()}>
                     SIGN OUT
-                </div>
+                </button>
             ) : (
                 <Link className='option' to='/signin'>
                     SIGN IN
                 </Link>
             )}
+            <CartIcon />
         </div>
+        <CartDropdown />
     </div>
-);
+
+)
+
 
 
 const mapStateToProps = state => ({
