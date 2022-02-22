@@ -1,7 +1,7 @@
 //  * Actions 
 import CartActionTypes from './cart.types'
 //  * Utilities
-import { addItemToCart } from './cart.utils'
+import { addItemToCart, removeItemFromCart } from './cart.utils'
 
 const INITIAL_STATE = {
     hidden: true,
@@ -19,6 +19,21 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 cartItems: addItemToCart(state.cartItems, action.payload)
+            }
+        case CartActionTypes.REMOVE_ITEMS:
+            return {
+                ...state,
+                // * Nesesitamos una nueva utility function que nos regrese un array
+                // * con todos los elmentos que tenemos pero que remueva uno 
+                // * y removerlo por completo en caso de que sea el ultimo.
+                // * 
+                cartItems: removeItemFromCart(state.cartItems, action.payload)
+            }
+        case CartActionTypes.CLEAR_ITEM_FOR_CART:
+            return {
+                ...state,
+                // ! Filtramos para eliminar el item que viene del action. 
+                cartItems: state.cartItems.filter(cartItem => cartItem.id !== action.payload.id)
             }
         default:
             return state
