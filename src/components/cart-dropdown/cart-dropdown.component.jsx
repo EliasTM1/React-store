@@ -1,4 +1,6 @@
 import React from 'react';
+// * React Router DOM 
+import { withRouter } from 'react-router-dom'
 //  * Components
 import CustomButton from '../custom-button/custom-button.component'
 import CartItem from '../cart-item/cart-item.component'
@@ -6,12 +8,13 @@ import CartItem from '../cart-item/cart-item.component'
 import './cart-dropdown.styles.scss'
 //  * Redux
 import { connect } from 'react-redux'
+import { toggleCartHidden } from '../../redux/cart/cart.actions'
 //  * Reselect 
 import { createStructuredSelector } from 'reselect'
-import { selectCrtItemsCount } from '../../redux/cart/cart.selectors'
+import { selectCartItem } from '../../redux/cart/cart.selectors'
 
 
-const CartDropdown = ({ cartItems }) => (
+const CartDropdown = ({ cartItems, history, dispatch }) => (
     <div className='cart-dropdown'>
         <div className='cart-items' />
         {cartItems.length ? (
@@ -19,14 +22,17 @@ const CartDropdown = ({ cartItems }) => (
             (<span className='empty-message'>Your Cart is Empty</span>)
 
         }
-        <CustomButton>Go to checkout</CustomButton>
+        <CustomButton onClick={() => {
+            history.push('/checkout')
+            dispatch(toggleCartHidden())
+        }}  >Go to checkout</CustomButton>
     </div>
 )
 
 // ? This function allow us to receive 
 // ? redux store as a parameter and, then use it as props.
 const mapStateToProps = createStructuredSelector({
-    cartItems: selectCrtItemsCount
+    cartItems: selectCartItem
 })
 
-export default connect(mapStateToProps)(CartDropdown)  
+export default withRouter(connect(mapStateToProps)(CartDropdown))  

@@ -19,7 +19,7 @@ const selectCart = state => state.cart
 */
 export const selectCartItem = createSelector([selectCart], cart => cart.cartItems);
 
-export const selectCartHidden = createSelector([selectCart], cart => cart.cartItems)
+export const selectCartHidden = createSelector([selectCart], cart => cart.hidden)
 
 
 export const selectCrtItemsCount = createSelector(
@@ -33,4 +33,10 @@ export const selectedCartItemsCount = createSelector(
     // * Como segundo es una funcion que toma como argumento  el productos de cada uno de esos seletoces, para devolver una pieza mas pequena de codigo todavia.
     cartItems =>
         cartItems.reduce((acomulador, cartItem) => acomulador + cartItem.quantity, 0)
+)
+
+export const selectCartTotal = createSelector(
+    [selectCartItem],
+    cartItems =>
+        cartItems.reduce((acomulador, cartItem) => acomulador + cartItem.quantity * cartItem.price, 0)
 )
