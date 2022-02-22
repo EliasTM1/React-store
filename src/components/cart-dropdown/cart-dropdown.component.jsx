@@ -6,15 +6,18 @@ import CartItem from '../cart-item/cart-item.component'
 import './cart-dropdown.styles.scss'
 //  * Redux
 import { connect } from 'react-redux'
-//  * Selectores
+//  * Reselect 
+import { createStructuredSelector } from 'reselect'
 import { selectCrtItemsCount } from '../../redux/cart/cart.selectors'
 
 
 const CartDropdown = ({ cartItems }) => (
     <div className='cart-dropdown'>
         <div className='cart-items' />
-        {
-            cartItems.map(cartItem => (<CartItem key={cartItem.id} item={cartItem} />))
+        {cartItems.length ? (
+            cartItems.map(cartItem => (<CartItem key={cartItem.id} item={cartItem} />))) :
+            (<span className='empty-message'>Your Cart is Empty</span>)
+
         }
         <CustomButton>Go to checkout</CustomButton>
     </div>
@@ -22,8 +25,8 @@ const CartDropdown = ({ cartItems }) => (
 
 // ? This function allow us to receive 
 // ? redux store as a parameter and, then use it as props.
-const mapStateToProps = (state) => ({
-    cartItems: selectCrtItemsCount(state)
+const mapStateToProps = createStructuredSelector({
+    cartItems: selectCrtItemsCount
 })
 
 export default connect(mapStateToProps)(CartDropdown)  

@@ -7,6 +7,11 @@ import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { auth } from '../../firebase/firebase.utils'
 // * Redux
 import { connect } from 'react-redux'
+// * Reselect
+import { createStructuredSelector } from 'reselect'
+// * Selectors
+import { selectCartHidden } from '../../redux/cart/cart.selectors'
+import { selectCurrentUser } from '../../redux/users/user.selector'
 //  * Syles and Icons
 import './header.styles.scss'
 // * Components
@@ -45,11 +50,14 @@ const Header = ({ currentUser, hidden }) => (
 
 )
 
+// import { selectCartHidden } from '../../redux/cart/cart.selectors'
+// import { selectCurrentUser } from '../../redux/users/user.selector'
 
-
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-    currentUser,
-    hidden
+const mapStateToProps = (state) => ({
+    currentUser: selectCurrentUser(state),
+    hidden: selectCartHidden(state)
 })
 
-export default connect(mapStateToProps)(Header) 
+export default connect(mapStateToProps)(Header)
+
+
