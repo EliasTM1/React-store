@@ -34,8 +34,6 @@ import { selectCurrentUser } from './redux/users/user.selector'
 
 
 class App extends React.Component {
-
-
   unsubscribeFromAuth = null
 
   componentDidMount() {
@@ -68,7 +66,7 @@ class App extends React.Component {
         <Switch>
 
           <Route exact path='/' component={Hompage} />
-          <Route exact path='/shop' component={ShopPage} />
+          <Route path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={CheckOutPage} />
           <Route
             exact
