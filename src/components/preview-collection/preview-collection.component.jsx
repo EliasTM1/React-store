@@ -1,8 +1,8 @@
 import React from 'react';
-//  ? Components
-import CollectionItem from '../collection-item/collection-item.component.jsx'
 // ? Styles
 import './preview-collection.styles.scss'
+//  ? Components
+import CollectionItem from '../collection-item/collection-item.component.jsx'
 
 /*
   * Is iimportant to remember that when this component gets
@@ -12,11 +12,12 @@ import './preview-collection.styles.scss'
 
 const CollectionPreview = ({ title, items }) => (
     <div className='collection-preview'>
+        {console.log(title, items)}
         <h1 className='title'>{title.toUpperCase()}</h1>
         <div className='preview'>
             {items
                 .filter((item, index) => index < 4)
-                .map((item) => (
+                .map(item => (
                     <CollectionItem key={item.id} item={item} />
                 ))}
         </div>

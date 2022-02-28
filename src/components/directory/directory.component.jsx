@@ -7,9 +7,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 //  * Reducers
 import { selectDirectorySections } from '../../redux/directory/directory.selector'
-
 //  * Components 
 import MenuItem from '../menu-item/menu-item.component'
+
+
+
+// ? Component Starts
 
 const Directory = ({ sections }) => (
 
@@ -20,6 +23,8 @@ const Directory = ({ sections }) => (
     </div>
 
 )
+// ? Finish Starts
+
 // ! Insead fo destructuring each property, we can spread the vallues with the operator inside and object 
 const mapStateToProps = createStructuredSelector({
     sections: selectDirectorySections
