@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 // * Component
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
 // * Reselect
 import { createStructuredSelector } from 'reselect'
 import { selectCartItem, selectCartTotal } from '../../redux/cart/cart.selectors'
@@ -43,6 +44,10 @@ const CheckOutPage = ({ cartItems, total }) => (
         }
         <div className='total'>
             Your toal is: ${total}
+        </div>
+        <StripeCheckoutButton price={total} />
+        <div className='text-warning'>
+            USE 4242 4242 4242 4242::::: EXPIRATION: 03/23 ::::: CVV:123
         </div>
     </div>
 
